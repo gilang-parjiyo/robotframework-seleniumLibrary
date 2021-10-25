@@ -54,7 +54,7 @@ where
 * `variables`: Define your robot variables in a centralized place. Do not put any sensitive data here!
 * `conda.yaml`: Environment configuration file.
 * `robot.yaml`: Robot configuration file.
-* `tasks.robot`: Robot Framework task suite - high level process definition.
+* `test.robot`: Robot Framework test suite - high level process definition.
 
 In addition to these you can create your own directories (e.g. `bin`, `tmp`). Add these directories to the `PATH` or `PYTHONPATH` section of `robot.yaml` if necessary.
 
