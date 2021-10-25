@@ -1,7 +1,15 @@
 # README for the robot
 
-This project should demonstrate  how selenium interact with various types of elements such as dropdown menus, checkboxes, text fields, buttons, links, alerts, file upload widgets, and frames.
+This project demonstrate  how selenium interact with various types of elements such as dropdown menus, checkboxes, text fields, buttons, links, alerts, file upload widgets, and frames.
 
+Run all test suite:
+```
+robot --outputdir output .\tests\  
+```
+Run specific test cases
+```
+robot --outputdir output .\tests\alerts-frames-windows\2-Alerts.robot
+```
 
 ## Development guide
 
@@ -29,11 +37,14 @@ The directory structure given by the template:
 │   └── keywords.robot
 ├── libraries
 │   └── Library.py
+├── output
+│   └── report.html
+├── tests
+│   └── test.robot
 ├── variables
 │   └── variables.py
 ├── conda.yaml
-├── robot.yaml
-└── tasks.robot
+└── robot.yaml
 ```
 
 where
