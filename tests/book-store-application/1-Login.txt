@@ -1,0 +1,54 @@
+*** Settings ***
+Documentation     Select Menu
+Library           SeleniumLibrary
+Resource          ../../keywords/resource.resource
+Suite Setup       Begin Test
+Suite Teardown    End Test
+
+*** Variables ***
+# Menu
+${BOOK STORE APPLICATION}    xpath=//h5[.='Book Store Application']
+${MENU LOGIN}     xpath=//span[.='Login']
+# New User
+${NEW USER}       id=newUser
+${FIRST NAME}     id=firstname
+${LAST NAME}      id=lastname
+${USERNAME}       id=userName
+${PASSWORD}       id=password
+${ROBOT}          xpath=//span[@id='recaptcha-anchor']/div
+${REGISTER}       id=register
+${BTN LOGIN}      id=login
+
+*** Test Cases ***
+Book Store Application
+    [Documentation]    Performing Testing Select Menu
+    Enter Login
+    Create New User
+    # Login
+
+*** Keywords ***
+Enter Login
+    [Documentation]    Enter page menu
+    Execute Javascript    window.scrollTo(0,300)
+    Click Then Verify Text    ${BOOK STORE APPLICATION}    Book Store
+    Execute Javascript    window.scrollTo(0,300)
+    Click Then Verify Text    ${MENU LOGIN}    Login
+
+Create New User
+    [Documentation]    Mocking login page
+    Click Button    ${NEW USER}
+    Input Text    ${FIRST NAME}    Gilang
+    Input Text    ${LAST NAME}    Romadhan
+    Input Text    ${USERNAME}    Gilang
+    Input Text    ${PASSWORD}    P*ssw0rd
+    Click Element At Coordinates    ${PASSWORD}    0    100
+    # Click Element    ${ROBOT}
+    Click Button    ${REGISTER}
+    Alert Should Be Present    text=User Register Successfully.    action=ACCEPT
+
+Login
+    [Documentation]    Handle login page
+    Wait Until Element Is Visible    ${NEW USER}
+    Input Text    ${NEW USER}    Gilang
+    Input Text    ${PASSWORD}    P*ssw0rd
+    Click Element    ${BTN LOGIN}

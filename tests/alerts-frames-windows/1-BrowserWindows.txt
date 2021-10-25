@@ -1,0 +1,48 @@
+*** Settings ***
+Documentation     Text Box
+Library           SeleniumLibrary
+Resource          ../../keywords/resource.resource
+Suite Setup       Begin Test
+Suite Teardown    End Test
+
+*** Variables ***
+${H5 ALERTS}      xpath=//h5[.='Alerts, Frame & Windows']
+${BTN NEW TAB}    xpath=//button[@id='tabButton']
+${BTN NEW WINDOW}    id=windowButton
+${BTN NEW WINDOW MESSAGE}    id=messageWindowButton
+${BROWSER WINDOWS}    xpath=//span[.='Browser Windows']
+${HEADING}        xpath=//h1[text()="This is a sample page"]
+
+*** Test Cases ***
+Browser And Windows
+    [Documentation]    Mocking user Browser Windows
+    Enter Page Browser And Windows
+    New Tab
+    New Browser 1
+    New Browser 2
+
+*** Keywords ***
+Enter Page Browser And Windows
+    [Documentation]    Enter AB testing page and back to home page
+    Click Then Verify Text    ${H5 ALERTS}    Elements
+    Click Then Verify Text    ${BROWSER WINDOWS}    Browser Windows
+
+New Tab
+    [Documentation]    Mocking user open new tab
+    Click Element    ${BTN NEW TAB}
+    ${url}  Get Locations 
+    Should Be Equal    ${url}[1]    https://demoqa.com/sample
+
+
+
+New Browser 1
+    [Documentation]   Mocking chenge browser
+    Click Element    ${BTN NEW WINDOW}
+    ${url}  Get Locations  
+    Should Be Equal    ${url}[1]     https://demoqa.com/sample
+
+New Browser 2
+    [Documentation]   Mocking chenge browser
+    Click Element    ${BTN NEW WINDOW MESSAGE}
+    ${url}  Get Locations  
+    Should Be Equal    ${url}[1]     about:blank
